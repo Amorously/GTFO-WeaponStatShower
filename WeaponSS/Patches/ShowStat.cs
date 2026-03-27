@@ -30,9 +30,9 @@ namespace WeaponStatShower.Patches
             Instance = this;
             WeaponStatShowerPlugin.Instance.Config.Bind(ConfigEnabled, true, new ConfigDescription("Show the stats of a weapon."));
             WeaponStatShowerPlugin.Instance.Config.Bind(Language, LanguageEnum.English, new ConfigDescription("Select the mod language."));
-            WeaponStatShowerPlugin.Instance.Config.Bind<string>(ConfigSleepers, "ALL",
+            WeaponStatShowerPlugin.Instance.Config.Bind<string>(ConfigSleepers, "DESCRIPTION_ONLY",
                 new ConfigDescription("Select which Sleepers are shown, separeted by a comma.\n" +
-                "Acceptable values: ALL, NONE, STRIKER, SHOOTER, SCOUT, BIG_STRIKER, BIG_SHOOTER, CHARGER, CHARGER_SCOUT"));
+                "Acceptable values: ALL, NONE, STRIKER, SHOOTER, SCOUT, BIG_STRIKER, BIG_SHOOTER, CHARGER, CHARGER_SCOUT, DESCRIPTION_ONLY"));
 
             _weaponDescriptionBuilder = new WeaponDescriptionBuilder();
         }
@@ -65,7 +65,10 @@ namespace WeaponStatShower.Patches
 
             _weaponDescriptionBuilder.Inizialize(idRange, PlayerDataBlock.GetBlock(1U), CurrLanguageValue);
 
-            __instance.GearDescription = _weaponDescriptionBuilder.DescriptionFormatter(__instance.GearDescription);
+            string builtDescription = _weaponDescriptionBuilder.DescriptionFormatter(__instance.GearDescription);
+            __instance.GearDescription = CurrShownSleepers.Equals("DESCRIPTION_ONLY") 
+                ? $"{builtDescription}\n{__instance.GearDescription}" 
+                : builtDescription;
             __instance.GearPublicName = _weaponDescriptionBuilder.FireRateFormatter(__instance.GearPublicName);
         }
     }

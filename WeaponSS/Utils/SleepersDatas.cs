@@ -16,6 +16,7 @@ namespace WeaponStatShower.Utils
             {
                 switch (monster.Trim())
                 {
+                    case "DETAILS_ONLY":
                     case "NONE":
                         EnemyDatas.Clear(); //just to be sure
                         return;

@@ -251,9 +251,6 @@ namespace WeaponStatShower.Utils
             return "".Equals(sb.ToString())? "" : sb.ToString() + "\n";
         }
 
-
-
-
         private string GetFormatedWeaponStats(ArchetypeDataBlock archeTypeDataBlock, bool isSentryGun = false)
         {
             if (archeTypeDataBlock == null) return string.Empty;
