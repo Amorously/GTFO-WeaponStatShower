@@ -2,8 +2,8 @@
 {
     internal class LanguageDatasClass
     {
-        public LanguageDatas english { get; set; }
-        public LanguageDatas chinese { get; set; }
+        public LanguageDatas english { get; set; } = new();
+        public LanguageDatas chinese { get; set; } = new();
 
     }
 }

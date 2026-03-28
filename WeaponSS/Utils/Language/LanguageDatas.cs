@@ -4,23 +4,23 @@ namespace WeaponStatShower.Utils.Language
 {
     public class LanguageDatas
     {
-        public FiremodeLanguageModel firemode { get; set; }
-        public MeleeLanguageModel melee { get; set; }
-        public SpreadLanguageModel spread { get; set; }
-        public SleepersLanguageModel sleepers { get; set; }
-        public string damage { get; set; }
-        public string clip { get; set; }
-        public string maxAmmo { get; set; }
-        public string falloff { get; set; }
-        public string reload { get; set; }
-        public string stagger { get; set; }
-        public string precision { get; set; }
-        public string pierceCount { get; set; }
-        public string rateOfFire { get; set; }
-        public string aimDSpread { get; set; }
-        public string hipSpread { get; set; }
-        public string deployable { get; set; }
-        public string longChargeUp { get; set; }
-        public string shortChargeUp { get; set; }
+        public FiremodeLanguageModel firemode { get; set; } = new();
+        public MeleeLanguageModel melee { get; set; } = new();
+        public SpreadLanguageModel spread { get; set; } = new();
+        public SleepersLanguageModel sleepers { get; set; } = new();
+        public string damage { get; set; } = string.Empty;
+        public string clip { get; set; } = string.Empty;
+        public string maxAmmo { get; set; } = string.Empty;
+        public string falloff { get; set; } = string.Empty;
+        public string reload { get; set; } = string.Empty;
+        public string stagger { get; set; } = string.Empty;
+        public string precision { get; set; } = string.Empty;
+        public string pierceCount { get; set; } = string.Empty;
+        public string rateOfFire { get; set; } = string.Empty;
+        public string aimDSpread { get; set; } = string.Empty;
+        public string hipSpread { get; set; } = string.Empty;
+        public string deployable { get; set; } = string.Empty;
+        public string longChargeUp { get; set; } = string.Empty;
+        public string shortChargeUp { get; set; } = string.Empty;
     }
 }
