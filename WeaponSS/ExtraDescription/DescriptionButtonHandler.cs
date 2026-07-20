@@ -25,6 +25,7 @@ namespace WeaponStatShower.ExtraDescription
         private LocaleText[] _descriptions = null!;
         private int _index = 0;
         private GearIDRange? _lastRange;
+        private bool _hasText = false;
 
         public event Action<LocaleText>? OnDescriptionChanged;
 
@@ -75,9 +76,37 @@ namespace WeaponStatShower.ExtraDescription
 
         public void SetData(GearIDRange idRange)
         {
-            if (_lastRange?.IsEqual(idRange) == true) return;
+            if (_lastRange?.IsEqual(idRange) == true)
+            {
+                if (_hasText)
+                    SetBoxText();
+                return;
+            }
             _lastRange = idRange;
 
+            _hasText = CreateInfo(idRange, out var descriptionIndex);
+            if (!_hasText) return;
+
+            if (!WeaponStatShowerPlugin.PreservePage || _index >= _descriptions.Length)
+                _index = 0;
+
+            // The normal description is loaded by default, so only update if needed
+            if (descriptionIndex != _index || WeaponStatShowerPlugin.StatsLocation == WeaponStatShowerPlugin.StatsPosition.Combined)
+                SetBoxText();
+
+            // May happen if combined
+            if (_descriptions.Length == 1)
+            {
+                _gameObject.SetActive(false);
+                return;
+            }
+
+            _gameObject.SetActive(true);
+            SetTabText();
+        }
+
+        private bool CreateInfo(GearIDRange idRange, out int descriptionIndex)
+        {
             var catID = idRange.GetCompID(eGearComponent.Category);
             var catBlock = GearCategoryDataBlock.GetBlock(catID);
             var archBlock = ArchetypeUtil.GetMappedArchetypeDataBlock(idRange, catID, catBlock);
@@ -104,12 +133,13 @@ namespace WeaponStatShower.ExtraDescription
             if (!showStats && (!hasCustom || customData!.Descriptions.Length == 0))
             {
                 _gameObject.SetActive(false);
-                return;
+                descriptionIndex = -1;
+                return false;
             }
 
             List<LocaleText> headerBuilder = new();
             List<LocaleText> descBuilder = new();
-            int descriptionIndex = DescriptionDataManager.Current.GlobalSettings.DefaultDescriptionIndex;
+            descriptionIndex = DescriptionDataManager.Current.GlobalSettings.DefaultDescriptionIndex;
             if (hasCustom)
             {
                 if (customData!.DescriptionIndexOverride >= 0)
@@ -120,7 +150,6 @@ namespace WeaponStatShower.ExtraDescription
             }
 
             var defaultHeader = LocaleText.Empty;
-            var defaultDesc = new LocaleText(description);
             if (showStats)
             {
                 (var header, var desc) = CreateGeneratedStats(idRange);
@@ -139,14 +168,14 @@ namespace WeaponStatShower.ExtraDescription
                         break;
                     case WeaponStatShowerPlugin.StatsPosition.Combined:
                         defaultHeader = header;
-                        defaultDesc = new LocaleText(desc.ToString() + '\n' + defaultDesc.ToString());
+                        description = new LocaleText(desc.ToString() + '\n' + description.ToString());
                         break;
                 }
             }
 
             descriptionIndex = Math.Min(descriptionIndex, descBuilder.Count);
             // Description index could exceed available count in some cases; default to first tab if so.
-            descBuilder.Insert(descriptionIndex, defaultDesc);
+            descBuilder.Insert(descriptionIndex, description);
             headerBuilder.Insert(descriptionIndex, defaultHeader);
 
             _descriptions = descBuilder.ToArray();
@@ -158,25 +187,7 @@ namespace WeaponStatShower.ExtraDescription
                 if (_headers[i] == LocaleText.Empty)
                     _headers[i] = normalHeader;
 
-            if (!WeaponStatShowerPlugin.PreservePage || _index >= _descriptions.Length)
-                _index = 0;
-
-            // The normal description is loaded by default, so only update if needed
-            if (descriptionIndex != _index || WeaponStatShowerPlugin.StatsLocation == WeaponStatShowerPlugin.StatsPosition.Combined)
-            {
-                _infoBox.m_infoMainTitleText.SetText(_headers[_index]);
-                _infoBox.m_infoDescriptionText.SetText(_descriptions[_index]);
-            }
-
-            // May happen if combined
-            if (_descriptions.Length == 1)
-            {
-                _gameObject.SetActive(false);
-                return;
-            }
-
-            _gameObject.SetActive(true);
-            _text.SetText($"<< {_index + 1} >>");
+            return true;
         }
 
         private void OnBtnPress(int _)
@@ -192,10 +203,17 @@ namespace WeaponStatShower.ExtraDescription
             else
                 _index = _descriptions.Length - 1;
 
+            SetBoxText();
+            SetTabText();
+        }
+
+        private void SetBoxText()
+        {
             _infoBox.m_infoMainTitleText.SetText(_headers[_index]);
             _infoBox.m_infoDescriptionText.SetText(_descriptions[_index]);
-            _text.SetText($"<< {_index + 1} >>");
         }
+
+        private void SetTabText() => _text.SetText($"<< {_index + 1} >>");
 
         private static (LocaleText header, LocaleText desc) CreateGeneratedStats(GearIDRange idRange)
         {
