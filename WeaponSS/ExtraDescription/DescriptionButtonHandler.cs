@@ -175,13 +175,15 @@ namespace WeaponStatShower.ExtraDescription
 
             // Description index could exceed available count in some cases; default to last tab if so.
             descriptionIndex = Math.Min(descriptionIndex, descBuilder.Count);
-            
+
             // Only allow hiding the default tab if any other tabs exist.
             if (descBuilder.Count == 0 || !hasCustom || !customData!.HideDefaultDescription)
             {
                 descBuilder.Insert(descriptionIndex, description);
                 headerBuilder.Insert(descriptionIndex, defaultHeader);
             }
+            else
+                descriptionIndex = -1;
 
             _descriptions = descBuilder.ToArray();
             _headers = headerBuilder.ToArray();
