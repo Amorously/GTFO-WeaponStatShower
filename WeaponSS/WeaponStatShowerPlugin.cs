@@ -10,7 +10,7 @@ using WeaponStatShower.Utils.Language;
 
 namespace WeaponStatShower
 {
-    [BepInPlugin(GUID, ModName, "2.0.3")]
+    [BepInPlugin(GUID, ModName, "2.0.4")]
     [BepInProcess("GTFO.exe")]
     [BepInDependency(MTFOWrapper.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(PartialData.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]

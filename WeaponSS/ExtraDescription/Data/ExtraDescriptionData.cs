@@ -20,6 +20,7 @@ namespace WeaponStatShower.ExtraDescription.Data
         public LocaleText[] Headers { get; set; } = Array.Empty<LocaleText>();
         public LocaleText[] Descriptions { get; set; } = Array.Empty<LocaleText>();
         public int DescriptionIndexOverride { get; set; } = -1;
+        public bool HideDefaultDescription { get; set; } = false;
         public string Name { get; set; } = string.Empty;
     }
 }

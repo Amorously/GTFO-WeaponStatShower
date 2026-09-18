@@ -175,8 +175,11 @@ namespace WeaponStatShower.ExtraDescription
 
             descriptionIndex = Math.Min(descriptionIndex, descBuilder.Count);
             // Description index could exceed available count in some cases; default to first tab if so.
-            descBuilder.Insert(descriptionIndex, description);
-            headerBuilder.Insert(descriptionIndex, defaultHeader);
+            if (!hasCustom || !customData!.HideDefaultDescription)
+            {
+                descBuilder.Insert(descriptionIndex, description);
+                headerBuilder.Insert(descriptionIndex, defaultHeader);
+            }
 
             _descriptions = descBuilder.ToArray();
             _headers = headerBuilder.ToArray();
