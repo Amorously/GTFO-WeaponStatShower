@@ -40,7 +40,12 @@ namespace WeaponStatShower.Utils
             if (_language == language && _languageDatas != null) return false;
 
             var languageStrings = JsonSerializer.Deserialize<LanguageDatasClass>(LocalizedString.JsonString)!;
-            _languageDatas = language.Equals(LanguageEnum.English) ? languageStrings.english : languageStrings.chinese;
+            _languageDatas = language switch
+            {
+                LanguageEnum.Chinese => languageStrings.chinese,
+                LanguageEnum.Spanish => languageStrings.spanish,
+                _ => languageStrings.english
+            };
             _language = language;
             return true;
         }
@@ -193,7 +198,7 @@ namespace WeaponStatShower.Utils
             if (archetypeDB == null) return string.Empty;
 
             int count = 0;
-            int dividerThreshold = _language != LanguageEnum.English ? 3 : 4;
+            int dividerThreshold = _language == LanguageEnum.Chinese ? 3 : 4;
             _strBuilder.Clear();
 
             void Divider()

@@ -3,6 +3,7 @@
     internal enum LanguageEnum
     {
         English,
-        Chinese
+        Chinese,
+        Spanish
     }
 }

@@ -108,6 +108,59 @@
 				""deployable"": ""可部署"",
 				""longChargeUp"": ""长蓄力"",
 				""shortChargeUp"": ""短蓄力""
+			},
+
+			""spanish"": {
+				""firemode"": {
+					""fullA"": ""Auto"",
+					""semiA"": ""Semi"",
+					""burst"": ""Ráfaga"",
+					""shotgunSentry"": ""Escopeta-S""
+				},
+				""melee"": {
+					""light"": ""Lig"",
+					""heavy"": ""Pes"",
+					""canRunWhileCharging"": ""No corre"",
+					""sleepingEnemiesMultiplier"": ""Dorm"",
+					""backstabMultiplier"": ""Esp"",
+					""environmentMultiplier"": ""Ent"",
+					""canPierce"": ""Perforante"",
+					""shortRange"": ""Corto alcance"",
+					""mediumRange"": ""Medio alcance"",
+					""longRange"": ""Largo alcance"",
+					""hammer"": ""Martillo - Equilibrado"",
+					""knife"": ""Cuchillo - Rápido"",
+					""bat"": ""Bate - Rápido"",
+					""spear"": ""Lanza - Lento""
+				},
+				""sleepers"": {
+					""striker"": ""STRK"",
+					""shooter"": ""SHTR"",
+					""scout"": ""SCOUT"",
+					""bigStriker"": ""B-STRK"",
+					""bigShooter"": ""B-SHTR"",
+					""charger"": ""CHRG"",
+					""chargerScout"": ""C-SCOUT"",
+					""occipit"": ""n"",
+					""head"": ""c"",
+					""back"": ""e"",
+					""chest"": ""p""
+				},
+				""damage"": ""Daño"",
+				""clip"": ""Carg"",
+				""maxAmmo"": ""Máx"",
+				""falloff"": ""Dist"",
+				""reload"": ""Rec"",
+				""stagger"": ""Aturd"",
+				""precision"": ""Prec"",
+				""pierceCount"": ""Perf"",
+				""rateOfFire"": ""Cad"",
+				""aimDSpread"": ""Mira"",
+				""hipSpread"": ""Cadera"",
+				""spread"": ""Disp"",
+				""deployable"": ""Desplegable"",
+				""longChargeUp"": ""Carga larga"",
+				""shortChargeUp"": ""Carga corta""
 			}
 		}";
 	}
