@@ -4,6 +4,7 @@
     {
         public LanguageDatas english { get; set; } = new();
         public LanguageDatas chinese { get; set; } = new();
+        public LanguageDatas spanish { get; set; } = new();
 
     }
 }

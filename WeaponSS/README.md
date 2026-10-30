@@ -48,6 +48,10 @@ and just follow the instructions.
 把倒数第二段最后一行的Language = English改为Language = Chinese，即可切换为中文。
 祝你游戏愉快
 
+## Disponible en español
+Abre el archivo "BepInEx/config/WeaponStatShower.cfg" con el Bloc de notas y cambia `Language = English` por `Language = Spanish`.
+Leyenda de muertes de un disparo: p = pecho, e = espalda, c = cabeza (de frente), n = nuca.
+
 ## **Installation**
 
 ### EASY
